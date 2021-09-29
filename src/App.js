@@ -4,26 +4,27 @@ import Create from "./components/Create/Create";
 import Delete from "./components/Delete/Delete";
 import Read from "./components/Read/Read";
 import Update from "./components/Update/Update";
+import {BrowserRouter, Route} from "react-router-dom";
 
 function App() {
   return (
+    <BrowserRouter>
   <div className="App">
     <div>
-        <Create></Create>
+        <Route exact path ="/create" component={Create}></Route>
     </div>
     <div>
-        <Read></Read>
+    <Route exact path ="/read" component={Read}></Route>
     </div>
     <div>
-        <Update></Update>
+    <Route exact path ="/update" component={Update}></Route>
     </div>
     <div>
-        <Delete></Delete>
+    <Route  exact path="/delete" component={Delete}></Route>
     </div>
-
   </div>
+  </BrowserRouter>
   )
-  
 }
   
 export default App;

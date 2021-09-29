@@ -1,28 +1,47 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import './Create.css';
-import { Button, checkbox, Form } from 'semantic-ui-react';
+import { Button, Checkbox, Form } from 'semantic-ui-react';
+import axios from 'axios';
 
 
 export default function Create() {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+
+  const userDetails = {firstName: firstName, lastName: lastName};
+  
+
+const callMockAPI = () => {
+  console.log(firstName);
+  console.log(lastName);
+
+
+  const endPointURL= "https://6151d1954a5f22001701d471.mockapi.io/people";
+
+  axios
+    .post(endPointURL,userDetails)
+    .then((response) => console.log(response.data))
+    .catch((response) => console.log(response))
+
+};
+
+
   return (
     <div>
-      <form class="ui form">
-        <div class="field">
-          <label>First Name</label>
-          <input type="text" name="first-name" placeholder="First Name"></input>
-        </div>
-        <div class="field">
-          <label>Last Name</label>
-          <input type="text" name="last-name" placeholder="Last Name"></input>
-        </div>
-        <div class="field">
-          <div class="ui checkbox">
-            <input type="checkbox" tabindex="0" class="hidden"></input>
-            <label>I agree to the Terms and Conditions</label>
-          </div>
-        </div>
-        <button class="ui button" type="submit">Submit</button>
-      </form>
-    </div>
+    <Form>
+    <Form.Field>
+      <label>First Name</label>
+      <input placeholder='First Name' onChange={(e) => setFirstName(e.target.value)}/>
+    </Form.Field>
+    <Form.Field>
+      <label>Last Name</label>
+      <input placeholder='Last Name' onChange={(e) => setLastName(e.target.value)} />
+    </Form.Field>
+    <Form.Field>
+      <Checkbox label='I agree to the Terms and Conditions' />
+    </Form.Field>
+    <Button type='submit' onClick={callMockAPI}>Submit</Button>
+  </Form>
+  </div>
   )
 }
