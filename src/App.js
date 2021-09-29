@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import 'semantic-ui-css/semantic.min.css'
+import "./App.css";
+import Create from "./components/Create/Create";
+import Delete from "./components/Delete/Delete";
+import Read from "./components/Read/Read";
+import Update from "./components/Update/Update";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+  <div className="App">
+    <div>
+        <Create></Create>
     </div>
-  );
-}
+    <div>
+        <Read></Read>
+    </div>
+    <div>
+        <Update></Update>
+    </div>
+    <div>
+        <Delete></Delete>
+    </div>
 
+  </div>
+  )
+  
+}
+  
 export default App;
