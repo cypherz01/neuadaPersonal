@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { Button, Icon, Label, Menu, Table } from 'semantic-ui-react'
 import './Read.css';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 export default function Read() {
   const [tableData, setTableData] =useState([]);
@@ -18,8 +19,8 @@ export default function Read() {
 
   function setLocalStorage(data){
     localStorage.setItem("id", data.id)
-    localStorage.setItem("firstName", data.id)
-    localStorage.setItem("lastName", data.id)
+    localStorage.setItem("firstName", data.firstName)
+    localStorage.setItem("lastName", data.lastName)
   }
 
   useEffect(() => {
@@ -34,6 +35,8 @@ export default function Read() {
         <Table.HeaderCell>ID</Table.HeaderCell>
         <Table.HeaderCell>First Name</Table.HeaderCell>
         <Table.HeaderCell>Last Name</Table.HeaderCell>
+        <Table.HeaderCell>Update</Table.HeaderCell>
+        <Table.HeaderCell>Delete</Table.HeaderCell>
       </Table.Row>
     </Table.Header>
     <Table.Body>
@@ -43,10 +46,14 @@ export default function Read() {
         <Table.Cell>{data.firstName}</Table.Cell>
         <Table.Cell>{data.lastName}</Table.Cell>
         <Table.Cell>
+          <Link to ="/update">
           <Button color= "green" onClick={() => setLocalStorage(data)} >Update</Button>
+          </Link>
         </Table.Cell>
         <Table.Cell>
+          <Link to ="/delete">
           <Button color= "red" onClick={() => setLocalStorage(data)}>Delete</Button>
+          </Link>
         </Table.Cell>
 
       </Table.Row>
