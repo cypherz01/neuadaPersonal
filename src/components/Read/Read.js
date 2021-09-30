@@ -21,6 +21,8 @@ export default function Read() {
     localStorage.setItem("id", data.id)
     localStorage.setItem("firstName", data.firstName)
     localStorage.setItem("lastName", data.lastName)
+    localStorage.setItem("gender", data.gender)
+    localStorage.setItem("phoneNumber", data.phoneNumber)
   }
 
   useEffect(() => {
@@ -35,6 +37,8 @@ export default function Read() {
         <Table.HeaderCell>ID</Table.HeaderCell>
         <Table.HeaderCell>First Name</Table.HeaderCell>
         <Table.HeaderCell>Last Name</Table.HeaderCell>
+        <Table.HeaderCell>Gender</Table.HeaderCell>
+        <Table.HeaderCell>Phone Number</Table.HeaderCell>
         <Table.HeaderCell>Update</Table.HeaderCell>
         <Table.HeaderCell>Delete</Table.HeaderCell>
       </Table.Row>
@@ -45,6 +49,8 @@ export default function Read() {
         <Table.Cell>{data.id}</Table.Cell>
         <Table.Cell>{data.firstName}</Table.Cell>
         <Table.Cell>{data.lastName}</Table.Cell>
+        <Table.Cell>{data.gender}</Table.Cell>
+        <Table.Cell>{data.phoneNumber}</Table.Cell>
         <Table.Cell>
           <Link to ="/update">
           <Button color= "green" onClick={() => setLocalStorage(data)} >Update</Button>
