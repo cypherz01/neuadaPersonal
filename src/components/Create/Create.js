@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import "./Create.css";
 import { Button, Checkbox, Form, Dropdown } from "semantic-ui-react";
 import axios from "axios";
+import { useHistory } from 'react-router';
+
 
 export default function Create() {
   const [prefix, setPrefix] = useState("");
@@ -9,6 +11,10 @@ export default function Create() {
   const [lastName, setLastName] = useState("");
   const [gender, setGender] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+
+  const history = useHistory();
+
+  
 
   const genderOptions = [
     { text: "Male", value: "Male" },
@@ -41,48 +47,50 @@ export default function Create() {
 
     const endPointURL = "https://6151d1954a5f22001701d471.mockapi.io/people";
 
+
     axios
       .post(endPointURL, userDetails)
-      .then((response) => console.log(response.data))
+      .then(() => history.push("/read"))
       .catch((response) => console.log(response));
   };
 
   return (
     <div>
       <Form>
-        <Form.Field>
-            <label>Prefix</label>
-            <Dropdown
-              required
-              placeholder="prefix"
-              fluid
-              selection
-              options={prefixOptions}
-              onChange={(e, data) => setPrefix(data.value)}
-            />
-            <label>First Name</label>
-            <input
-              required
-              placeholder="First Name"
-              onChange={(e) => setFirstName(e.target.value)}
-            />
-        </Form.Field>
-        <Form.Field>
-          <label>Last Name</label>
-          <input
+        <Form.Field required >
+          <label>Prefix</label>
+          <Dropdown
             required
+            placeholder="prefix"
+            fluid
+            selection
+            options={prefixOptions}
+            onChange={(e, data) => setPrefix(data.value)}
+          />
+        </Form.Field>
+        <Form.Group widths="equal">
+          <Form.Input
+            required
+            fluid
+            label="First Name"
+            placeholder="First name"
+            onChange={(e) => setFirstName(e.target.value)}
+          />
+          <Form.Input
+            required
+            fluid
+            label="Last Name"
             placeholder="Last Name"
             onChange={(e) => setLastName(e.target.value)}
           />
-        </Form.Field>
+        </Form.Group>
         <Form.Field>
-          <label>Gender</label>
-          <Dropdown
+          <Form.Select
             required
-            placeholder="Select Gender"
             fluid
-            selection
+            label="Gender"
             options={genderOptions}
+            placeholder="Gender"
             onChange={(e, data) => setGender(data.value)}
           />
         </Form.Field>
@@ -94,7 +102,7 @@ export default function Create() {
             onChange={(e) => setPhoneNumber(e.target.value)}
           />
         </Form.Field>
-        <Button type="submit" onClick={callMockAPI}>
+        <Button  required type="submit" onClick={callMockAPI}>
           Submit
         </Button>
       </Form>
