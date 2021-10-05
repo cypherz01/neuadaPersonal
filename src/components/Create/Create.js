@@ -9,8 +9,18 @@ export default function Create() {
   const [prefix, setPrefix] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [gender, setGender] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+
+  const [addressLineOne, setAddressLineOne] = useState("");
+  const [addressLineTwo, setAddressLineTwo] = useState("");
+  const [city, setCity] = useState("");
+  const [postCode, setPostCode] = useState("");
+  const [vehcileType, setVehcileType] = useState("");
+  const [engineSize, setEngineSize] = useState("");
+  const [additionalDrivers, setAdditionalDrivers] = useState("");
+  const [isCommercial, setIsCommercial] = useState("");
+  const [isOutsideRegisteredState, setIsOutsideRegisteredState] = useState("");
+  const [vehicleValue, setVehicleValue] = useState("");
 
   const history = useHistory();
 
@@ -34,7 +44,6 @@ export default function Create() {
     prefix: prefix,
     firstName: firstName,
     lastName: lastName,
-    gender: gender,
     phoneNumber: phoneNumber,
   };
 
@@ -42,7 +51,6 @@ export default function Create() {
     console.log(prefix);
     console.log(firstName);
     console.log(lastName);
-    console.log(gender);
     console.log(phoneNumber);
 
     const endPointURL = "https://6151d1954a5f22001701d471.mockapi.io/people";
@@ -59,14 +67,17 @@ export default function Create() {
       <Form>
 
         <Form.Group required widths="equal" >
+        <Form.Field>
           <label>Prefix</label>
           <Dropdown
             required
-            placeholder="prefix"
+            placeholder="Prefix"
+            fluid
             selection
             options={prefixOptions}
             onChange={(e, data) => setPrefix(data.value)}
           />
+        </Form.Field>
           <Form.Input
             required
             fluid
