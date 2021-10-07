@@ -2,6 +2,7 @@ import React, { useState} from "react";
 import "./Create.css";
 import { Button, Checkbox, Form, Dropdown, Radio } from "semantic-ui-react";
 import axios from "axios";
+import {prefixOptions,vehicleTypeOptions, engineSizeOptions, additionalDriversOptions} from "./options.js";
 
 export default function Create() {
   const [prefix, setPrefix] = useState("");
@@ -20,38 +21,6 @@ export default function Create() {
   const [vehicleValue, setVehicleValue] = useState("");
   
   const endPointURL = "https://6151d1954a5f22001701d471.mockapi.io/people";
-
-  const prefixOptions = [
-    { text: "Mr.", value: "Mr" },
-    { text: "Mrs.", value: "Mrs" },
-    { text: "Ms.", value: "Ms" },
-    { text: "Dr.", value: "Dr" },
-  ];
-
-  const vehicleTypeOptions = [
-    { text: "Cabriolet", value: "Cabriolet" },
-    { text: "Coupe", value: "Coupe" },
-    { text: "Estate", value: "Estate" },
-    { text: "Hatchback", value: "Hatchback" },
-    { text: "Other", value: "Other" },
-  ];
-
-  const engineSizeOptions = [
-    { text: "1000", value: 1000 },
-    { text: "1600", value: 1600 },
-    { text: "2000", value: 2000 },
-    { text: "2500", value: 2500 },
-    { text: "3000", value: 3000 },
-    { text: "other", value: -1 },
-  ];
-
-  const additionalDriversOptions = [
-    { text: "0", value: 0 },
-    { text: "1", value: 1 },
-    { text: "2", value: 2 },
-    { text: "3", value: 3 },
-    { text: "4", value: 4 },
-  ];
 
   const userDetails = {
     prefix: prefix,
