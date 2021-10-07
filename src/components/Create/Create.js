@@ -9,29 +9,20 @@ export default function Create() {
   const [prefix, setPrefix] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
+  const [telephoneNumber, setTelephoneNumber] = useState("");
 
   const [addressLineOne, setAddressLineOne] = useState("");
   const [addressLineTwo, setAddressLineTwo] = useState("");
-  const [city, setCity] = useState("");
-  const [postCode, setPostCode] = useState("");
-  const [vehcileType, setVehcileType] = useState("");
+  const [addressCity, setAddressCity] = useState("");
+  const [addressPostCode, setAddressPostCode] = useState("");
+  const [vehicleType, setVehicleType] = useState("");
   const [engineSize, setEngineSize] = useState("");
   const [additionalDrivers, setAdditionalDrivers] = useState("");
-  const [isCommercial, setIsCommercial] = useState("");
-  const [isOutsideRegisteredState, setIsOutsideRegisteredState] = useState("");
+  const [isCommercial, setIsCommercial] = useState(false);
+  const [isRegisteredOutsideState, setIsRegisteredOutsideState] = useState("");
   const [vehicleValue, setVehicleValue] = useState("");
 
   const history = useHistory();
-
-  
-
-  const genderOptions = [
-    { text: "Male", value: "Male" },
-    { text: "Female", value: "Female" },
-    { text: "Non-Binary", value: "Non-Binary" },
-    { text: "Other", value: "Other" },
-  ];
 
   const prefixOptions = [
     { text: "Mr.", value: "Mr" },
@@ -40,18 +31,51 @@ export default function Create() {
     { text: "Dr.", value: "Dr" },
   ];
 
+  const vehicleTypeOptions = [
+    { text: "Cabriolet", value: "Cabriolet" },
+    { text: "Coupe", value: "Coupe" },
+    { text: "Estate", value: "Estate" },
+    { text: "Hatchback", value: "Hatchback" },
+    { text: "Other", value: "Other" },
+  ];
+
+  const engineSizeOptions = [
+    { text: "1000", value: 1000 },
+    { text: "1600", value: 1600 },
+    { text: "2000", value: 2000 },
+    { text: "2500", value: 2500 },
+    { text: "3000", value: 3000 },
+    { text: "other", value: -1  },
+  ];
+
+  const additionalDriversOptions = [
+    { text: "0", value: 0 },
+    { text: "1", value: 1 },
+    { text: "2", value: 2 },
+    { text: "3", value: 3 },
+    { text: "4", value: 4 },
+  ];
+
   const userDetails = {
     prefix: prefix,
     firstName: firstName,
     lastName: lastName,
-    phoneNumber: phoneNumber,
+    addressLineOne: addressLineOne,
+    addressLineTwo: addressLineTwo,
+    addressCity:addressCity,
+    addressPostCode:addressPostCode,
+    vehicleType:vehicleType,
+    engineSize:engineSize,
+    additionalDrivers:additionalDrivers,
+    isCommercial:isCommercial,
+    isRegisteredOutsideState:isRegisteredOutsideState,
+    telephoneNumber: telephoneNumber,
+    vehicleValue:vehicleValue
   };
 
   const callMockAPI = () => {
-    console.log(prefix);
-    console.log(firstName);
-    console.log(lastName);
-    console.log(phoneNumber);
+    console.log(userDetails);
+
 
     const endPointURL = "https://6151d1954a5f22001701d471.mockapi.io/people";
 
@@ -65,7 +89,6 @@ export default function Create() {
   return (
     <div>
       <Form>
-
         <Form.Group required widths="equal" >
         <Form.Field>
           <label>Prefix</label>
@@ -100,7 +123,7 @@ export default function Create() {
           <input
             required
             placeholder="phoneNumber"
-            onChange={(e) => setPhoneNumber(e.target.value)}
+            onChange={(e) => setTelephoneNumber(e.target.value)}
           />
         </Form.Field>
 
@@ -110,12 +133,14 @@ export default function Create() {
             fluid
             label="Address Line 1"
             placeholder="Address Line 1"
+            onChange={(e) => setAddressLineOne(e.target.value)}
           />
           <Form.Input
             required
             fluid
             label="Address Line 2"
             placeholder="Address Line 2"
+            onChange={(e) => setAddressLineTwo(e.target.value)}
           />
         </Form.Group>
 
@@ -125,12 +150,14 @@ export default function Create() {
             fluid
             label="City"
             placeholder="City"
+            onChange={(e) => setAddressCity(e.target.value)}
           />
           <Form.Input
             required
             fluid
             label="Postcode"
             placeholder="Postcode"
+            onChange={(e) => setAddressPostCode(e.target.value)}
           />
         </Form.Group>
 
@@ -142,8 +169,8 @@ export default function Create() {
             placeholder="Vehicle  Type"
             fluid
             selection
-            options={prefixOptions}
-            onChange={(e, data) => setPrefix(data.value)}
+            options={vehicleTypeOptions}
+            onChange={(e, data) => setVehicleType(data.value)}
           />
         </Form.Field>
 
@@ -154,8 +181,8 @@ export default function Create() {
             placeholder="Engine Size"
             fluid
             selection
-            options={prefixOptions}
-            onChange={(e, data) => setPrefix(data.value)}
+            options={engineSizeOptions}
+            onChange={(e, data) => setEngineSize(data.value)}
           />
         </Form.Field>
 
@@ -166,8 +193,8 @@ export default function Create() {
             placeholder="Additional Drivers"
             fluid
             selection
-            options={prefixOptions}
-            onChange={(e, data) => setPrefix(data.value)}
+            options={additionalDriversOptions}
+            onChange={(e, data) => setAdditionalDrivers(data.value)}
           />
         </Form.Field>
 
@@ -177,6 +204,7 @@ export default function Create() {
             label='Yes'
             name='radioGroup'
             value= 'Yes'
+            onChange={(e) => setIsCommercial(false)}
           />
         </Form.Field>
         <Form.Field>
@@ -184,6 +212,7 @@ export default function Create() {
             label='No'
             name='radioGroup'
             value='No'
+            onChange={(e,data) => setIsCommercial(false)}
           />
         </Form.Field>
         <label>Will the vehicle be used outside the registered state?</label>
@@ -192,6 +221,7 @@ export default function Create() {
             label='Yes'
             name='radioGroup2'
             value= 'Yes'
+            onChange={(e,data) => setIsRegisteredOutsideState(true)}
           />
         </Form.Field>
         <Form.Field>
@@ -199,6 +229,7 @@ export default function Create() {
             label='No'
             name='radioGroup2'
             value='No'
+            onChange={(e,data) => setIsRegisteredOutsideState(false)}
           />
         </Form.Field>
         <Form.Field>
@@ -206,16 +237,9 @@ export default function Create() {
           <input
             required
             placeholder="range 0 - 50000"
-            onChange={(e) => setPhoneNumber(e.target.value)}
+            onChange={(e) => setVehicleValue(e.target.value)}
           />
         </Form.Field>
-
-        
-
-
-
-
-
 
         <Button  required type="submit" onClick={callMockAPI}>
           Submit
