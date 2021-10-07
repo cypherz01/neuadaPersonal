@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Button, Form, Checkbox, Table } from "semantic-ui-react";
+import React, { useState } from "react";
+import { Button, Form, Table } from "semantic-ui-react";
 import "./Read.css";
 import axios from "axios";
 
@@ -7,7 +7,7 @@ export default function Read() {
   const [tableData, setTableData] = useState([]);
   const [inputId, setInputId] = useState("");
   const [newTelephone, setNewTelephone] = useState("");
-  
+
   const userDetails = {
     telephoneNumber: newTelephone,
   };
@@ -40,30 +40,6 @@ export default function Read() {
     }
   }
 
-  function setLocalStorage(data) {
-    localStorage.setItem("id", data.id);
-    localStorage.setItem("prefix", data.prefix);
-    localStorage.setItem("firstName", data.firstName);
-    localStorage.setItem("lastName", data.lastName);
-    localStorage.setItem("addressLineOne", data.addressLineOne);
-    localStorage.setItem("addressLineTwo", data.addressLineTwo);
-    localStorage.setItem("addressCity", data.addressCity);
-    localStorage.setItem("addressPostCode", data.addressPostCode);
-    localStorage.setItem("vehicleType", data.vehicleType);
-    localStorage.setItem("additionalDrivers", data.additionalDrivers);
-    localStorage.setItem("isCommercial", data.isCommercial);
-    localStorage.setItem(
-      "isRegisteredOutsideState",
-      data.isRegisteredOutsideState
-    );
-    localStorage.setItem("telephoneNumber", data.telephoneNumber);
-    localStorage.setItem("vehicleValue", data.vehicleValue);
-  }
-
-  useEffect(() => {
-    callMockApi();
-  }, []);
-
   return (
     <div>
       <Form>
@@ -84,7 +60,7 @@ export default function Read() {
             placeholder="ID"
             onChange={(e) => setInputId(e.target.value)}
           />
-           <label>Enter New Telephone Number</label>
+          <label>Enter New Telephone Number</label>
           <input
             placeholder="telephone"
             onChange={(e) => setNewTelephone(e.target.value)}
@@ -119,16 +95,16 @@ export default function Read() {
           </Table.Row>
         </Table.Header>
         <Table.Body>
-            <Table.Row>
-              <Table.Cell>{tableData.id}</Table.Cell>
-              <Table.Cell>{tableData.prefix}</Table.Cell>
-              <Table.Cell>{tableData.firstName}</Table.Cell>
-              <Table.Cell>{tableData.lastName}</Table.Cell>
-              <Table.Cell>{tableData.addressLineOne}</Table.Cell>
-              <Table.Cell>{tableData.addressLineTwo}</Table.Cell>
-              <Table.Cell>{tableData.addressCity}</Table.Cell>
-              <Table.Cell>{tableData.addressPostCode}</Table.Cell>
-            </Table.Row>
+          <Table.Row>
+            <Table.Cell>{tableData.id}</Table.Cell>
+            <Table.Cell>{tableData.prefix}</Table.Cell>
+            <Table.Cell>{tableData.firstName}</Table.Cell>
+            <Table.Cell>{tableData.lastName}</Table.Cell>
+            <Table.Cell>{tableData.addressLineOne}</Table.Cell>
+            <Table.Cell>{tableData.addressLineTwo}</Table.Cell>
+            <Table.Cell>{tableData.addressCity}</Table.Cell>
+            <Table.Cell>{tableData.addressPostCode}</Table.Cell>
+          </Table.Row>
         </Table.Body>
       </Table>
     </div>

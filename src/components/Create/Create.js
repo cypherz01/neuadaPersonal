@@ -1,16 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import "./Create.css";
 import { Button, Checkbox, Form, Dropdown, Radio } from "semantic-ui-react";
 import axios from "axios";
-import { useHistory } from 'react-router';
-
 
 export default function Create() {
   const [prefix, setPrefix] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [telephoneNumber, setTelephoneNumber] = useState("");
-
   const [addressLineOne, setAddressLineOne] = useState("");
   const [addressLineTwo, setAddressLineTwo] = useState("");
   const [addressCity, setAddressCity] = useState("");
@@ -21,8 +18,8 @@ export default function Create() {
   const [isCommercial, setIsCommercial] = useState(false);
   const [isRegisteredOutsideState, setIsRegisteredOutsideState] = useState("");
   const [vehicleValue, setVehicleValue] = useState("");
-
-  const history = useHistory();
+  
+  const endPointURL = "https://6151d1954a5f22001701d471.mockapi.io/people";
 
   const prefixOptions = [
     { text: "Mr.", value: "Mr" },
@@ -45,7 +42,7 @@ export default function Create() {
     { text: "2000", value: 2000 },
     { text: "2500", value: 2500 },
     { text: "3000", value: 3000 },
-    { text: "other", value: -1  },
+    { text: "other", value: -1 },
   ];
 
   const additionalDriversOptions = [
@@ -62,45 +59,39 @@ export default function Create() {
     lastName: lastName,
     addressLineOne: addressLineOne,
     addressLineTwo: addressLineTwo,
-    addressCity:addressCity,
-    addressPostCode:addressPostCode,
-    vehicleType:vehicleType,
-    engineSize:engineSize,
-    additionalDrivers:additionalDrivers,
-    isCommercial:isCommercial,
-    isRegisteredOutsideState:isRegisteredOutsideState,
+    addressCity: addressCity,
+    addressPostCode: addressPostCode,
+    vehicleType: vehicleType,
+    engineSize: engineSize,
+    additionalDrivers: additionalDrivers,
+    isCommercial: isCommercial,
+    isRegisteredOutsideState: isRegisteredOutsideState,
     telephoneNumber: telephoneNumber,
-    vehicleValue:vehicleValue
+    vehicleValue: vehicleValue,
   };
 
   const callMockAPI = () => {
-    console.log(userDetails);
-
-
-    const endPointURL = "https://6151d1954a5f22001701d471.mockapi.io/people";
-
-
     axios
-      .post(endPointURL, userDetails)
-      .then(() => history.push("/read"))
+      .get(endPointURL, userDetails)
+      .then((response) => console.log(response))
       .catch((response) => console.log(response));
   };
 
   return (
     <div>
       <Form>
-        <Form.Group required widths="equal" >
-        <Form.Field>
-          <label>Prefix</label>
-          <Dropdown
-            required
-            placeholder="Prefix"
-            fluid
-            selection
-            options={prefixOptions}
-            onChange={(e, data) => setPrefix(data.value)}
-          />
-        </Form.Field>
+        <Form.Group required widths="equal">
+          <Form.Field>
+            <label>Prefix</label>
+            <Dropdown
+              required
+              placeholder="Prefix"
+              fluid
+              selection
+              options={prefixOptions}
+              onChange={(e, data) => setPrefix(data.value)}
+            />
+          </Form.Field>
           <Form.Input
             required
             fluid
@@ -116,7 +107,6 @@ export default function Create() {
             onChange={(e) => setLastName(e.target.value)}
           />
         </Form.Group>
-
 
         <Form.Field>
           <label>telephone Number</label>
@@ -161,8 +151,7 @@ export default function Create() {
           />
         </Form.Group>
 
-
-        <Form.Field >
+        <Form.Field>
           <label>Vehicle Type</label>
           <Dropdown
             required
@@ -174,7 +163,7 @@ export default function Create() {
           />
         </Form.Field>
 
-        <Form.Field >
+        <Form.Field>
           <label>Engine Size</label>
           <Dropdown
             required
@@ -186,7 +175,7 @@ export default function Create() {
           />
         </Form.Field>
 
-        <Form.Field >
+        <Form.Field>
           <label>Additional Drivers</label>
           <Dropdown
             required
@@ -199,41 +188,39 @@ export default function Create() {
         </Form.Field>
 
         <Form.Field>
-        <label> Will the vehicle be used for commercial purposes?</label>
+          <label> Will the vehicle be used for commercial purposes?</label>
           <Radio
-            label='Yes'
-            name='radioGroup'
-            value= 'Yes'
+            label="Yes"
+            name="radioGroup"
             onChange={(e) => setIsCommercial(false)}
           />
         </Form.Field>
         <Form.Field>
           <Radio
-            label='No'
-            name='radioGroup'
-            value='No'
-            onChange={(e,data) => setIsCommercial(false)}
+            label="No"
+            name="radioGroup"
+            onChange={(e, data) => setIsCommercial(false)}
           />
         </Form.Field>
         <label>Will the vehicle be used outside the registered state?</label>
         <Form.Field>
           <Radio
-            label='Yes'
-            name='radioGroup2'
-            value= 'Yes'
-            onChange={(e,data) => setIsRegisteredOutsideState(true)}
+            label="Yes"
+            name="radioGroup2"
+            onChange={(e, data) => setIsRegisteredOutsideState(true)}
           />
         </Form.Field>
         <Form.Field>
           <Radio
-            label='No'
-            name='radioGroup2'
-            value='No'
-            onChange={(e,data) => setIsRegisteredOutsideState(false)}
+            label="No"
+            name="radioGroup2"
+            onChange={(e, data) => setIsRegisteredOutsideState(false)}
           />
         </Form.Field>
         <Form.Field>
-          <label>What is the current value of the vehicle (range 0 - 50000)?</label>
+          <label>
+            What is the current value of the vehicle (range 0 - 50000)?
+          </label>
           <input
             required
             placeholder="range 0 - 50000"
@@ -241,7 +228,7 @@ export default function Create() {
           />
         </Form.Field>
 
-        <Button  required type="submit" onClick={callMockAPI}>
+        <Button required type="submit" onClick={callMockAPI}>
           Submit
         </Button>
       </Form>
