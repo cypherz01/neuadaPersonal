@@ -1,8 +1,10 @@
 import React, { useState} from "react";
 import "./Create.css";
-import { Button, Checkbox, Form, Dropdown, Radio } from "semantic-ui-react";
+import { Button, Form, Dropdown, Radio } from "semantic-ui-react";
 import axios from "axios";
 import {prefixOptions,vehicleTypeOptions, engineSizeOptions, additionalDriversOptions} from "./options.js";
+import SemanticDatepicker from 'react-semantic-ui-datepickers';
+import 'react-semantic-ui-datepickers/dist/react-semantic-ui-datepickers.css';
 
 export default function Create() {
   const [prefix, setPrefix] = useState("");
@@ -19,6 +21,7 @@ export default function Create() {
   const [isCommercial, setIsCommercial] = useState(false);
   const [isRegisteredOutsideState, setIsRegisteredOutsideState] = useState("");
   const [vehicleValue, setVehicleValue] = useState("");
+  const [dateRegistered, setDateRegistered] = useState(null);
   
   const endPointURL = "https://6151d1954a5f22001701d471.mockapi.io/people";
 
@@ -37,13 +40,14 @@ export default function Create() {
     isRegisteredOutsideState: isRegisteredOutsideState,
     telephoneNumber: telephoneNumber,
     vehicleValue: vehicleValue,
+    dateRegistered:dateRegistered
   };
 
   const callMockAPI = () => {
     axios
-      .get(endPointURL, userDetails)
+      .post(endPointURL, userDetails)
       .then((response) => console.log(response))
-      .catch((response) => console.log(response));
+      .catch((error) => console.log(error));
   };
 
   return (
@@ -197,7 +201,18 @@ export default function Create() {
           />
         </Form.Field>
 
-        <Button required type="submit" onClick={callMockAPI}>
+        <Form.Field>
+          <label>
+            What is the date the vehicle was first registered?
+          </label>
+          <SemanticDatepicker
+            required
+            datePickerOnly={true}
+            onChange={(e,data) => setDateRegistered(data.value)}
+          />
+        </Form.Field>
+
+        <Button required type="submit" onClick={callMockAPI()}>
           Submit
         </Button>
       </Form>
