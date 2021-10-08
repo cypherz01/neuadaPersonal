@@ -88,10 +88,18 @@ export default function Read() {
             <Table.HeaderCell>prefix</Table.HeaderCell>
             <Table.HeaderCell>First Name</Table.HeaderCell>
             <Table.HeaderCell>Last Name</Table.HeaderCell>
+            <Table.HeaderCell>Telephone Number</Table.HeaderCell>
             <Table.HeaderCell>Address 1</Table.HeaderCell>
             <Table.HeaderCell>Adddress 2</Table.HeaderCell>
             <Table.HeaderCell>City</Table.HeaderCell>
             <Table.HeaderCell>Postcode</Table.HeaderCell>
+            <Table.HeaderCell>Vehicle Type</Table.HeaderCell>
+            <Table.HeaderCell>Engine Size</Table.HeaderCell>
+            <Table.HeaderCell>Additional Drivers</Table.HeaderCell>
+            <Table.HeaderCell>For Commerical Use?</Table.HeaderCell>
+            <Table.HeaderCell>Registered For Out Of State?</Table.HeaderCell>
+            <Table.HeaderCell>Vehcile Value</Table.HeaderCell>
+            <Table.HeaderCell>Date Registered</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
         <Table.Body>
@@ -100,10 +108,18 @@ export default function Read() {
             <Table.Cell>{tableData.prefix}</Table.Cell>
             <Table.Cell>{tableData.firstName}</Table.Cell>
             <Table.Cell>{tableData.lastName}</Table.Cell>
+            <Table.Cell>{tableData.telephoneNumber}</Table.Cell>
             <Table.Cell>{tableData.addressLineOne}</Table.Cell>
             <Table.Cell>{tableData.addressLineTwo}</Table.Cell>
             <Table.Cell>{tableData.addressCity}</Table.Cell>
             <Table.Cell>{tableData.addressPostCode}</Table.Cell>
+            <Table.Cell>{tableData.vehicleType}</Table.Cell>
+            <Table.Cell>{tableData.engineSize}</Table.Cell>
+            <Table.Cell>{tableData.additionalDrivers}</Table.Cell>
+            <Table.Cell>{tableData.isCommercial}</Table.Cell>
+            <Table.Cell>{tableData.isRegisteredOutsideState}</Table.Cell>
+            <Table.Cell>{tableData.vehicleValue}</Table.Cell>
+            <Table.Cell>{tableData.dateRegistered}</Table.Cell>
           </Table.Row>
         </Table.Body>
       </Table>
