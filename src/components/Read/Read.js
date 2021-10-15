@@ -13,24 +13,24 @@ export default function Read() {
   };
 
   function callMockApi(command) {
-    const endPointURL = `https://6151d1954a5f22001701d471.mockapi.io/people/${inputId}`;
+    const endPointURL = `http://localhost:8080/drivers`;
 
     switch (command) {
       case "GET":
         axios
-          .get(endPointURL)
+          .get(endPointURL+`?id=${inputId}`)
           .then((response) => setTableData(response.data))
           .catch((response) => console.log(response));
         return;
       case "UPDATE":
         axios
-          .put(endPointURL, userDetails)
+          .put(endPointURL+`/update?id=${inputId}&newTelephoneNumber=${newTelephone}`, userDetails)
           .then((response) => setTableData(response.data))
           .catch((response) => console.log(response));
         return;
       case "DELETE":
         axios
-          .delete(endPointURL)
+          .delete(endPointURL+`?id=${inputId}`)
           .then((response) => setTableData(response.data))
           .catch((response) => console.log(response));
         return;
@@ -112,7 +112,7 @@ export default function Read() {
             <Table.Cell>{tableData.addressLineOne}</Table.Cell>
             <Table.Cell>{tableData.addressLineTwo}</Table.Cell>
             <Table.Cell>{tableData.addressCity}</Table.Cell>
-            <Table.Cell>{tableData.addressPostCode}</Table.Cell>
+            <Table.Cell>{tableData.addressPostcode}</Table.Cell>
             <Table.Cell>{tableData.vehicleType}</Table.Cell>
             <Table.Cell>{tableData.engineSize}</Table.Cell>
             <Table.Cell>{tableData.additionalDrivers}</Table.Cell>

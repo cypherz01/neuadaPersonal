@@ -212,7 +212,7 @@ export default function Create() {
           />
         </Form.Field>
 
-        <Button required type="submit" onClick={callMockAPI()}>
+        <Button required type="submit" onClick={callMockAPI}>
           Submit
         </Button>
       </Form>
