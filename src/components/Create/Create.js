@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import "./Create.css";
 import { Button, Form, Dropdown, Radio } from "semantic-ui-react";
 import axios from "axios";
@@ -9,7 +8,7 @@ import {
   additionalDriversOptions,
 } from "./options.js";
 import SemanticDatepicker from "react-semantic-ui-datepickers";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import "react-semantic-ui-datepickers/dist/react-semantic-ui-datepickers.css";
 
@@ -17,47 +16,32 @@ export default function Create() {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
     getValues,
   } = useForm();
 
-  const [prefix, setPrefix] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [telephoneNumber, setTelephoneNumber] = useState("");
-  const [addressLineOne, setAddressLineOne] = useState("");
-  const [addressLineTwo, setAddressLineTwo] = useState("");
-  const [addressCity, setAddressCity] = useState("");
-  const [addressPostCode, setAddressPostCode] = useState("");
-  const [vehicleType, setVehicleType] = useState("");
-  const [engineSize, setEngineSize] = useState("");
-  const [additionalDrivers, setAdditionalDrivers] = useState("");
-  const [isCommercial, setIsCommercial] = useState(false);
-  const [isRegisteredOutsideState, setIsRegisteredOutsideState] = useState("");
-  const [vehicleValue, setVehicleValue] = useState("");
-  const [dateRegistered, setDateRegistered] = useState(null);
-
-  const endPointURL = "https://6151d1954a5f22001701d471.mockapi.io/people";
-
-  const userDetails = {
-    prefix: prefix,
-    firstName: firstName,
-    lastName: lastName,
-    addressLineOne: addressLineOne,
-    addressLineTwo: addressLineTwo,
-    addressCity: addressCity,
-    addressPostCode: addressPostCode,
-    vehicleType: vehicleType,
-    engineSize: engineSize,
-    additionalDrivers: additionalDrivers,
-    isCommercial: isCommercial,
-    isRegisteredOutsideState: isRegisteredOutsideState,
-    telephoneNumber: telephoneNumber,
-    vehicleValue: vehicleValue,
-    dateRegistered: dateRegistered,
-  };
-
   const callMockAPI = () => {
+    const userDetails = {
+      prefix: getValues("prefix"),
+      firstName: getValues("firstName"),
+      lastName: getValues("lastName"),
+      addressLineOne: getValues("addressLineOne"),
+      addressLineTwo: getValues("addressLineTwo"),
+      addressCity: getValues("addressCity"),
+      addressPostCode: getValues("addressPostCode"),
+      vehicleType: getValues("vehicleType"),
+      engineSize: getValues("engineSize"),
+      additionalDrivers: getValues("additionalDrivers"),
+      isCommercial: getValues("isCommercial"),
+      isRegisteredOutsideState: getValues("isRegisteredOutsideState"),
+      telephoneNumber: getValues("telephoneNumber"),
+      vehicleValue: getValues("vehicleValue"),
+      dateRegistered: getValues("dateRegistered"),
+    };
+
+    const endPointURL = "https://6151d1954a5f22001701d471.mockapi.io/people";
+
     axios
       .post(endPointURL, userDetails)
       .then((response) => console.log(response))
@@ -68,25 +52,34 @@ export default function Create() {
     <div>
       <Form onSubmit={handleSubmit(callMockAPI)}>
         <Form.Group widths="equal">
-          <Form.Field error={!!errors.prefix}>
-            <label>Prefix</label>
-            <Dropdown
-              placeholder="Prefix"
-              fluid
-              selection
-              options={prefixOptions}
-              onChange={(e, data) => setPrefix(data.value)}
-              {...register("prefix", { required: "prefix is mandatory" })}
+        <Form.Field error={!!errors.firstName}>
+          <label>First Name</label>
+            <Controller
+            control ={control}
+              name="prefix"
+              defaultValue={""}
+              rules={{ required: "Prefix is a required field" }}
+              render={({ field: { name, value, onBlur, onChange, ref } }) => (
+                <Dropdown
+                  isInvalid={errors.prefix}
+                  name={name}
+                  placeholder="Select..."
+                  options={prefixOptions}
+                  value={prefixOptions.find((c) => c.value === value)}
+                  onChange={(val) => onChange(val.value)}
+                  onBlur={(val) => onBlur(val)}
+                  inputRef={ref}
+                />
+              )}
             />
             <ErrorMessage errors={errors} name="prefix" />
           </Form.Field>
-
           <Form.Field error={!!errors.firstName}>
-            <Form.Input
+            <label>First Name</label>
+            <input
               fluid
-              label="First Name"
+              label="first Name"
               placeholder="First Name"
-              onChange={(e) => setFirstName(e.target.value)}
               {...register("firstName", {
                 required: "First Name is mandatory",
               })}
@@ -95,25 +88,23 @@ export default function Create() {
           </Form.Field>
 
           <Form.Field error={!!errors.lastName}>
-            <Form.Input
+            <label>Last Name</label>
+            <input
               fluid
               label="Last Name"
               placeholder="Last Name"
-              onChange={(e) => setLastName(e.target.value)}
               {...register("lastName", {
                 required: "Last Name is mandatory",
               })}
             />
             <ErrorMessage errors={errors} name="lastName" />
           </Form.Field>
-
         </Form.Group>
 
         <Form.Field error={!!errors.telephoneNumber}>
           <label>telephone Number</label>
           <input
             placeholder="phoneNumber"
-            onChange={(e) => setTelephoneNumber(e.target.value)}
             {...register("telephoneNumber", {
               required: "telephone Number is mandatory",
             })}
@@ -122,72 +113,125 @@ export default function Create() {
         </Form.Field>
 
         <Form.Group widths="equal">
-          <Form.Input
-            fluid
-            label="Address Line 1"
-            placeholder="Address Line 1"
-            onChange={(e) => setAddressLineOne(e.target.value)}
-          />
-          <ErrorMessage errors={errors} name="addressLineOne" />
-          <Form.Input
-            fluid
-            label="Address Line 2"
-            placeholder="Address Line 2"
-            onChange={(e) => setAddressLineTwo(e.target.value)}
-          />
-          <ErrorMessage errors={errors} name="addressLineTwo" />
+          <Form.Field error={!!errors.addressLineOne}>
+            <label>Address Line One</label>
+            <input
+              fluid
+              label="Address Line 1"
+              placeholder="Address Line 1"
+              {...register("addressLineOne", {
+                required: "address is mandatory",
+              })}
+            />
+            <ErrorMessage errors={errors} name="addressLineOne" />
+          </Form.Field>
+          <Form.Field error={!!errors.addressLineTwo}>
+            <label>Address Line Two</label>
+            <input
+              fluid
+              label="Address Line 2"
+              placeholder="Address Line 2"
+              {...register("addressLineTwo", {
+                required: "address is mandatory",
+              })}
+            />
+            <ErrorMessage errors={errors} name="addressLineTwo" />
+          </Form.Field>
         </Form.Group>
 
         <Form.Group widths="equal">
-          <Form.Input
-            fluid
-            label="City"
-            placeholder="City"
-            onChange={(e) => setAddressCity(e.target.value)}
-          />
-          <ErrorMessage errors={errors} name="addressCity" />
-          <Form.Input
-            fluid
-            label="Postcode"
-            placeholder="Postcode"
-            onChange={(e) => setAddressPostCode(e.target.value)}
-          />
-          <ErrorMessage errors={errors} name="addressPostcode" />
+          <Form.Field error={!!errors.addressCity}>
+            <label>City</label>
+            <input
+              fluid
+              label="City"
+              placeholder="City"
+              {...register("addressCity", {
+                required: "City is mandatory",
+              })}
+            />
+            <ErrorMessage errors={errors} name="addressCity" />
+          </Form.Field>
+          <Form.Field error={!!errors.addressPostCode}>
+            <label>Postcode</label>
+            <input
+              fluid
+              label="Postcode"
+              placeholder="Postcode"
+              {...register("addressPostCode", {
+                required: "Postcode is mandatory",
+              })}
+            />
+            <ErrorMessage errors={errors} name="addressPostCode" />
+          </Form.Field>
         </Form.Group>
 
-        <Form.Field>
+        <Form.Field error={!!errors.vehicleType}>
           <label>Vehicle Type</label>
-          <Dropdown
-            placeholder="Vehicle  Type"
-            fluid
-            selection
-            options={vehicleTypeOptions}
-            onChange={(e, data) => setVehicleType(data.value)}
-          />
+          <Controller
+            control ={control}
+              name="vehicleType"
+              defaultValue={""}
+              rules={{ required: "Type is a required field" }}
+              render={({ field: { name, value, onBlur, onChange, ref } }) => (
+                <Dropdown
+                  isInvalid={errors.vehicleType}
+                  name={name}
+                  placeholder="Select..."
+                  options={vehicleTypeOptions}
+                  value={vehicleTypeOptions.find((c) => c.value === value)}
+                  onChange={(val) => onChange(val.value)}
+                  onBlur={(val) => onBlur(val)}
+                  inputRef={ref}
+                />
+              )}
+            />
           <ErrorMessage errors={errors} name="vehicleType" />
         </Form.Field>
 
-        <Form.Field>
+        <Form.Field error={!!errors.engineSize}>
           <label>Engine Size</label>
-          <Dropdown
-            placeholder="Engine Size"
-            fluid
-            selection
-            options={engineSizeOptions}
-            onChange={(e, data) => setEngineSize(data.value)}
-          />
+          <Controller
+            control ={control}
+              name="engineSize"
+              defaultValue={""}
+              rules={{ required: "Size is a required field" }}
+              render={({ field: { name, value, onBlur, onChange, ref } }) => (
+                <Dropdown
+                  isInvalid={errors.engineSize}
+                  name={name}
+                  placeholder="Select..."
+                  options={engineSizeOptions}
+                  value={engineSizeOptions.find((c) => c.value === value)}
+                  onChange={(val) => onChange(val.value)}
+                  onBlur={(val) => onBlur(val)}
+                  inputRef={ref}
+                />
+              )}
+            />
           <ErrorMessage errors={errors} name="engineSize" />
         </Form.Field>
 
-        <Form.Field>
+        <Form.Field error={!!errors.additionalDrivers}>
           <label>Additional Drivers</label>
-          <Dropdown
-            placeholder="Additional Drivers"
-            fluid
-            selection
-            options={additionalDriversOptions}
-            onChange={(e, data) => setAdditionalDrivers(data.value)}
-          />
+          <Controller
+            control ={control}
+              name="additionalDrivers"
+              defaultValue={""}
+              rules={{ required: "This is a required field" }}
+              render={({ field: { name, value, onBlur, onChange, ref } }) => (
+                <Dropdown
+                  isInvalid={errors.additionalDrivers}
+                  name={name}
+                  placeholder="Select..."
+                  options={additionalDriversOptions}
+                  value={additionalDriversOptions.find((c) => c.value === value)}
+                  onChange={(val) => onChange(val.value)}
+                  onBlur={(val) => onBlur(val)}
+                  inputRef={ref}
+                />
+              )}
+            />
           <ErrorMessage errors={errors} name="additionalDrivers" />
         </Form.Field>
 
@@ -196,54 +240,67 @@ export default function Create() {
           <Radio
             label="Yes"
             name="radioGroup"
-            onChange={(e) => setIsCommercial(false)}
+            {...register("isCommercial", {
+              required: "Vehicle Value is mandatory",
+            })}
           />
         </Form.Field>
         <Form.Field>
           <Radio
             label="No"
             name="radioGroup"
-            onChange={(e, data) => setIsCommercial(false)}
+            {...register("isCommercial", {
+              required: "Vehicle Value is mandatory",
+            })}
           />
+          <ErrorMessage errors={errors} name="isCommerical" />
         </Form.Field>
         <label>Will the vehicle be used outside the registered state?</label>
         <Form.Field>
           <Radio
             label="Yes"
             name="radioGroup2"
-            onChange={(e, data) => setIsRegisteredOutsideState(true)}
+            {...register("isRegisteredOutsideState", {
+              required: "Vehicle Value is mandatory",
+            })}
           />
         </Form.Field>
         <Form.Field>
           <Radio
             label="No"
             name="radioGroup2"
-            onChange={(e, data) => setIsRegisteredOutsideState(false)}
+            {...register("isRegisteredOutsideState", {
+              required: "Vehicle Value is mandatory",
+            })}
           />
+          <ErrorMessage errors={errors} name="isRegisteredOutsideState" />
         </Form.Field>
-        <Form.Field>
+
+        <Form.Field error={!!errors.vehicleValue}>
           <label>
             What is the current value of the vehicle (range 0 - 50000)?
           </label>
           <input
             placeholder="range 0 - 50000"
-            onChange={(e) => setVehicleValue(e.target.value)}
+            {...register("vehicleValue", {
+              required: "Vehicle Value is mandatory",
+            })}
           />
           <ErrorMessage errors={errors} name="vehicleValue" />
         </Form.Field>
 
-        <Form.Field>
+        <Form.Field error={!!errors.dateRegistered}>
           <label>What is the date the vehicle was first registered?</label>
           <SemanticDatepicker
             datePickerOnly={true}
-            onChange={(e, data) => setDateRegistered(data.value)}
+            {...register("dateRegistered", {
+              required: "Date is mandatory",
+            })}
           />
           <ErrorMessage errors={errors} name="dateRegistered" />
         </Form.Field>
 
-        <Button type="submit" onClick={callMockAPI}>
-          Submit
-        </Button>
+        <Button type="submit">Submit</Button>
       </Form>
     </div>
   );
