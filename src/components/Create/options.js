@@ -1,34 +1,34 @@
 
 
 export const prefixOptions = [
-  { text: "Mr.", value: "Mr" },
-  { text: "Mrs.", value: "Mrs" },
-  { text: "Ms.", value: "Ms" },
-  { text: "Dr.", value: "Dr" },
+  { label: "Mr.", value: "Mr" },
+  { label: "Mrs.", value: "Mrs" },
+  { label: "Ms.", value: "Ms" },
+  { label: "Dr.", value: "Dr" },
 ];
 
 export const vehicleTypeOptions = [
-  { text: "Cabriolet", value: "Cabriolet" },
-  { text: "Coupe", value: "Coupe" },
-  { text: "Estate", value: "Estate" },
-  { text: "Hatchback", value: "Hatchback" },
-  { text: "Other", value: "Other" },
+  { label: "Cabriolet", value: "Cabriolet" },
+  { label: "Coupe", value: "Coupe" },
+  { label: "Estate", value: "Estate" },
+  { label: "Hatchback", value: "Hatchback" },
+  { label: "Other", value: "Other" },
 ];
 
 export const engineSizeOptions = [
-  { text: "1000", value: 1000 },
-  { text: "1600", value: 1600 },
-  { text: "2000", value: 2000 },
-  { text: "2500", value: 2500 },
-  { text: "3000", value: 3000 },
-  { text: "other", value: -1 },
+  { l: "1000", value: 1000 },
+  { label: "1600", value: 1600 },
+  { label: "2000", value: 2000 },
+  { label: "2500", value: 2500 },
+  { label: "3000", value: 3000 },
+  { label: "other", value: -1 },
 ];
 
 export const additionalDriversOptions = [
-  { text: "0", value: 0 },
-  { text: "1", value: 1 },
-  { text: "2", value: 2 },
-  { text: "3", value: 3 },
-  { text: "4", value: 4 },
+  { label: "0", value: 0 },
+  { label: "1", value: 1 },
+  { label: "2", value: 2 },
+  { label: "3", value: 3 },
+  { label: "4", value: 4 },
 ];
 
