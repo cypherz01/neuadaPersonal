@@ -81,6 +81,7 @@ export default function Create() {
             />
             <ErrorMessage errors={errors} name="prefix" />
           </Form.Field>
+
           <Form.Field error={!!errors.firstName}>
             <label>First Name</label>
             <input
@@ -88,6 +89,14 @@ export default function Create() {
               placeholder="First Name"
               {...register("firstName", {
                 required: "First Name is mandatory",
+                maxLength: {
+                  value: 50,
+                  message: "Max length is 50 characters",
+                },
+                pattern: {
+                  value: /^[a-z ,.'-]+$/i,
+                  message: "Names must begin with a letter",
+                }
               })}
             />
             <ErrorMessage errors={errors} name="firstName" />
@@ -100,6 +109,14 @@ export default function Create() {
               placeholder="Last Name"
               {...register("lastName", {
                 required: "Last Name is mandatory",
+                maxLength: {
+                  value: 50,
+                  message: "Max length is 50 characters",
+                },
+                pattern: {
+                  value: /^[a-z ,.'-]+$/i,
+                  message: "Names must begin with a letter",
+                }
               })}
             />
             <ErrorMessage errors={errors} name="lastName" />
@@ -112,6 +129,14 @@ export default function Create() {
             placeholder="phoneNumber"
             {...register("telephoneNumber", {
               required: "telephone Number is mandatory",
+              maxLength: {
+                value: 20,
+                message: "Max length is 20 characters",
+              },
+              pattern: {
+                value: /^[0-9 ,.'-]+$/i,
+                message: "must begin with a Number",
+              }
             })}
           />
           <ErrorMessage errors={errors} name="telephoneNumber" />
@@ -125,6 +150,10 @@ export default function Create() {
               placeholder="Address Line 1"
               {...register("addressLineOne", {
                 required: "address is mandatory",
+                maxLength: {
+                  value: 20,
+                  message: "Max length is 20 characters",
+                }
               })}
             />
             <ErrorMessage errors={errors} name="addressLineOne" />
@@ -136,6 +165,10 @@ export default function Create() {
               placeholder="Address Line 2"
               {...register("addressLineTwo", {
                 required: "address is mandatory",
+                maxLength: {
+                  value: 20,
+                  message: "Max length is 20 characters",
+                }
               })}
             />
             <ErrorMessage errors={errors} name="addressLineTwo" />
@@ -150,6 +183,14 @@ export default function Create() {
               placeholder="City"
               {...register("addressCity", {
                 required: "City is mandatory",
+                maxLength: {
+                  value: 50,
+                  message: "Max length is 50 characters",
+                },
+                pattern: {
+                  value: /^[a-z ,.'-]+$/i,
+                  message: "Names must begin with a letter",
+                }
               })}
             />
             <ErrorMessage errors={errors} name="addressCity" />
@@ -161,6 +202,10 @@ export default function Create() {
               placeholder="Postcode"
               {...register("addressPostCode", {
                 required: "Postcode is mandatory",
+                maxLength: {
+                  value: 50,
+                  message: "Max length is 20 characters",
+                }
               })}
             />
             <ErrorMessage errors={errors} name="addressPostCode" />
@@ -216,7 +261,7 @@ export default function Create() {
             name="additionalDrivers"
             defaultValue={""}
             rules={{ required: "This is a required field" }}
-            render={({ field: { name, value, onBlur, onChange, ref } }) => (
+            render={({ field: { name, value, onBlur, onChange } }) => (
               <Select
                 name={name}
                 placeholder="Select..."
@@ -237,7 +282,7 @@ export default function Create() {
             name="radioGroup"
             type="radio"
             {...register("isCommercial", {
-              required: "Vehicle Value is mandatory",
+              required: "this field is mandatory",
             })}
           />
           <span className="checkmark"></span>
@@ -291,6 +336,15 @@ export default function Create() {
             placeholder="range 0 - 50000"
             {...register("vehicleValue", {
               required: "Vehicle Value is mandatory",
+              max: {
+                value: 50000,
+                message: "Max Value 50000",
+              },
+              pattern: {
+                value: /^[0-9 ,.'-]+$/i,
+                message: "Only Numbers",
+              }
+              
             })}
           />
           <ErrorMessage errors={errors} name="vehicleValue" />
@@ -307,10 +361,10 @@ export default function Create() {
             defaultValue={new Date()}
             render={({ field: { onChange, onBlur, value } }) => (
               <SemanticDatepicker
-                selected={value}
-                onChange={onChange}
-                onBlur={onBlur}
                 placeholderText="Select date"
+                {...register("dateRegistered", {
+                  required: "This is mandatory",
+                })}
               />
             )}
           />
