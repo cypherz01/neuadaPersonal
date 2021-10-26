@@ -13,7 +13,6 @@ import { ErrorMessage } from "@hookform/error-message";
 import "react-semantic-ui-datepickers/dist/react-semantic-ui-datepickers.css";
 import Select from "react-select";
 
-
 export default function Create() {
   const {
     register,
@@ -44,7 +43,7 @@ export default function Create() {
 
     console.log(userDetails);
 
-    const endPointURL = "https://6151d1954a5f22001701d471.mockapi.io/people";
+    const endPointURL = "http://localhost:8080/drivers";
 
     axios
       .post(endPointURL, userDetails)
@@ -96,7 +95,7 @@ export default function Create() {
                 pattern: {
                   value: /^[a-z ,.'-]+$/i,
                   message: "Names must begin with a letter",
-                }
+                },
               })}
             />
             <ErrorMessage errors={errors} name="firstName" />
@@ -116,7 +115,7 @@ export default function Create() {
                 pattern: {
                   value: /^[a-z ,.'-]+$/i,
                   message: "Names must begin with a letter",
-                }
+                },
               })}
             />
             <ErrorMessage errors={errors} name="lastName" />
@@ -136,7 +135,7 @@ export default function Create() {
               pattern: {
                 value: /^[0-9 ,.'-]+$/i,
                 message: "must begin with a Number",
-              }
+              },
             })}
           />
           <ErrorMessage errors={errors} name="telephoneNumber" />
@@ -153,7 +152,7 @@ export default function Create() {
                 maxLength: {
                   value: 20,
                   message: "Max length is 20 characters",
-                }
+                },
               })}
             />
             <ErrorMessage errors={errors} name="addressLineOne" />
@@ -168,7 +167,7 @@ export default function Create() {
                 maxLength: {
                   value: 20,
                   message: "Max length is 20 characters",
-                }
+                },
               })}
             />
             <ErrorMessage errors={errors} name="addressLineTwo" />
@@ -190,7 +189,7 @@ export default function Create() {
                 pattern: {
                   value: /^[a-z ,.'-]+$/i,
                   message: "Names must begin with a letter",
-                }
+                },
               })}
             />
             <ErrorMessage errors={errors} name="addressCity" />
@@ -205,7 +204,7 @@ export default function Create() {
                 maxLength: {
                   value: 50,
                   message: "Max length is 20 characters",
-                }
+                },
               })}
             />
             <ErrorMessage errors={errors} name="addressPostCode" />
@@ -216,7 +215,7 @@ export default function Create() {
           <label>vehicle Type</label>
           <Controller
             control={control}
-            name="vehcileType"
+            name="vehicleType"
             defaultValue={""}
             rules={{ required: "This is a required field" }}
             render={({ field: { name, value, onBlur, onChange, ref } }) => (
@@ -343,8 +342,7 @@ export default function Create() {
               pattern: {
                 value: /^[0-9 ,.'-]+$/i,
                 message: "Only Numbers",
-              }
-              
+              },
             })}
           />
           <ErrorMessage errors={errors} name="vehicleValue" />
