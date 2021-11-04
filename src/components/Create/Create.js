@@ -30,12 +30,12 @@ export default function Create() {
       addressLineOne: getValues("addressLineOne"),
       addressLineTwo: getValues("addressLineTwo"),
       addressCity: getValues("addressCity"),
-      addressPostCode: getValues("addressPostCode"),
+      addressPostcode: getValues("addressPostcode"),
       vehicleType: getValues("vehicleType"),
       engineSize: getValues("engineSize"),
       additionalDrivers: getValues("additionalDrivers"),
-      isCommercial: getValues("isCommercial"),
-      isRegisteredOutsideState: getValues("isRegisteredOutsideState"),
+      commercial: getValues("commercial"),
+      registeredOutsideState: getValues("registeredOutsideState"),
       telephoneNumber: getValues("telephoneNumber"),
       vehicleValue: getValues("vehicleValue"),
       dateRegistered: getValues("dateRegistered"),
@@ -199,7 +199,7 @@ export default function Create() {
             <input
               label="Postcode"
               placeholder="Postcode"
-              {...register("addressPostCode", {
+              {...register("addressPostcode", {
                 required: "Postcode is mandatory",
                 maxLength: {
                   value: 50,
@@ -207,7 +207,7 @@ export default function Create() {
                 },
               })}
             />
-            <ErrorMessage errors={errors} name="addressPostCode" />
+            <ErrorMessage errors={errors} name="addressPostode" />
           </Form.Field>
         </Form.Group>
 
@@ -274,13 +274,14 @@ export default function Create() {
           <ErrorMessage errors={errors} name="additionalDrivers" />
         </Form.Field>
 
+        <label> Will the vehicle be used for commercial purposes?</label>
         <Form.Field>
-          <label> Will the vehicle be used for commercial purposes?</label>
           <input
             label="Yes"
             name="radioGroup"
             type="radio"
-            {...register("isCommercial", {
+            value = "True"
+            {...register("commercial", {
               required: "this field is mandatory",
             })}
           />
@@ -292,13 +293,14 @@ export default function Create() {
             label="No"
             name="radioGroup"
             type="radio"
-            {...register("isCommercial", {
-              required: "Vehicle Value is mandatory",
+            value = "False"
+            {...register("commercial", {
+              required: "This field is mandatory",
             })}
           />
           <span className="checkmark"></span>
           No
-          <ErrorMessage errors={errors} name="isCommerical" />
+          <ErrorMessage errors={errors} name="commerical" />
         </Form.Field>
         <label>Will the vehicle be used outside the registered state?</label>
         <Form.Field>
@@ -306,8 +308,9 @@ export default function Create() {
             label="Yes"
             name="radioGroup2"
             type="radio"
-            {...register("isRegisteredOutsideState", {
-              required: "Vehicle Value is mandatory",
+            value = "True"
+            {...register("registeredOutsideState", {
+              required: "this field is mandatory",
             })}
           />
           <span className="checkmark"></span>
@@ -318,13 +321,14 @@ export default function Create() {
             label="No"
             name="radioGroup2"
             type="radio"
-            {...register("isRegisteredOutsideState", {
-              required: " Vehicle Value is mandatory",
+            value = "False"
+            {...register("registeredOutsideState", {
+              required: " This field is mandatory",
             })}
           />
           <span className="checkmark"></span>
           No
-          <ErrorMessage errors={errors} name="isRegisteredOutsideState" />
+          <ErrorMessage errors={errors} name="registeredOutsideState" />
         </Form.Field>
 
         <Form.Field error={!!errors.vehicleValue}>

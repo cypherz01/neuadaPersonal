@@ -13,7 +13,7 @@ export default function Read() {
   };
 
   function callMockApi(command) {
-    const endPointURL = `http://localhost:8080/drivers`;
+    const endPointURL = `http://localhost:8080/drivers/single`;
 
     switch (command) {
       case "GET":
@@ -31,7 +31,7 @@ export default function Read() {
       case "DELETE":
         axios
           .delete(endPointURL+`?id=${inputId}`)
-          .then((response) => setTableData(response.data))
+          .then((response) => setTableData(response))
           .catch((response) => console.log(response));
         return;
       default:
@@ -116,8 +116,8 @@ export default function Read() {
             <Table.Cell>{tableData.vehicleType}</Table.Cell>
             <Table.Cell>{tableData.engineSize}</Table.Cell>
             <Table.Cell>{tableData.additionalDrivers}</Table.Cell>
-            <Table.Cell>{tableData.isCommercial}</Table.Cell>
-            <Table.Cell>{tableData.isRegisteredOutsideState}</Table.Cell>
+            <Table.Cell>{tableData.commercial}</Table.Cell>
+            <Table.Cell>{tableData.registeredOutsideState}</Table.Cell>
             <Table.Cell>{tableData.vehicleValue}</Table.Cell>
             <Table.Cell>{tableData.dateRegistered}</Table.Cell>
           </Table.Row>
