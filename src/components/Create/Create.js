@@ -14,6 +14,8 @@ import "react-semantic-ui-datepickers/dist/react-semantic-ui-datepickers.css";
 import Select from "react-select";
 
 export default function Create() {
+
+
   const {
     register,
     handleSubmit,
@@ -133,7 +135,7 @@ export default function Create() {
                 message: "Max length is 20 characters",
               },
               pattern: {
-                value: /^[0-9 ,.'-]+$/i,
+                value: /^(((\+44\s?\d{4}|\(?0\d{4}\)?)\s?\d{3}\s?\d{3})|((\+44\s?\d{3}|\(?0\d{3}\)?)\s?\d{3}\s?\d{4})|((\+44\s?\d{2}|\(?0\d{2}\)?)\s?\d{4}\s?\d{4}))(\s?\#(\d{4}|\d{3}))?$/i,
                 message: "must begin with a Number",
               },
             })}
@@ -202,12 +204,16 @@ export default function Create() {
               {...register("addressPostcode", {
                 required: "Postcode is mandatory",
                 maxLength: {
-                  value: 50,
-                  message: "Max length is 20 characters",
+                  value: 8,
+                  message: "Max length is 8 characters",
                 },
+                pattern: {
+                  value: /([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9][A-Za-z]?))))\s?[0-9][A-Za-z]{2})/i,
+                  message: "This isn't a  valid postcode."
+                }
               })}
             />
-            <ErrorMessage errors={errors} name="addressPostode" />
+            <ErrorMessage errors={errors} name="addressPostcode" />
           </Form.Field>
         </Form.Group>
 

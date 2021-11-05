@@ -13,12 +13,12 @@ export default function Read() {
   };
 
   function callMockApi(command) {
-    const endPointURL = `http://localhost:8080/drivers/single`;
+    const endPointURL = `http://localhost:8080/drivers`;
 
     switch (command) {
       case "GET":
         axios
-          .get(endPointURL+`?id=${inputId}`)
+          .get(endPointURL+`/single?id=${inputId}`)
           .then((response) => setTableData(response.data))
           .catch((response) => console.log(response));
         return;
@@ -30,7 +30,7 @@ export default function Read() {
         return;
       case "DELETE":
         axios
-          .delete(endPointURL+`?id=${inputId}`)
+          .delete(endPointURL+`/delete?id=${inputId}`)
           .then((response) => setTableData(response))
           .catch((response) => console.log(response));
         return;
