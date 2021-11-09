@@ -12,8 +12,11 @@ import { useForm, Controller } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import "react-semantic-ui-datepickers/dist/react-semantic-ui-datepickers.css";
 import Select from "react-select";
+import { useState } from "react";
 
 export default function Create() {
+ const [premium, setPremium] = useState(0)
+
   const {
     register,
     handleSubmit,
@@ -47,7 +50,7 @@ export default function Create() {
 
     axios
       .post(endPointURL, userDetails)
-      .then((response) => console.log(response))
+      .then((response) => setPremium(response.data.premium) )
       .then((document.getElementById("form module").hidden = false))
       .catch((error) => console.log(error));
   };
@@ -385,7 +388,7 @@ export default function Create() {
         <Button type="submit">Submit</Button>
       </Form>
       <div class="module" id="form module" hidden={true}>
-        <h1>this is a test message</h1>
+        <h1>this is a test message: {premium}</h1>
       </div>
     </div>
   );
