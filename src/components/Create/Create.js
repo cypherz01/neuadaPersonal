@@ -58,11 +58,11 @@ export default function Create() {
   };
 
   return (
-    <div>
+    <div class="form">
       <Form onSubmit={handleSubmit(callMockAPI, handleError)}>
         <Form.Group widths="equal">
           <Form.Field error={!!errors.prefix}>
-            <label>prefix</label>
+            <h1>Prefix</h1>
             <Controller
               id="prefix"
               name="prefix"
@@ -84,7 +84,7 @@ export default function Create() {
           </Form.Field>
 
           <Form.Field error={!!errors.firstName}>
-            <label>First Name</label>
+            <h1>First Name</h1>
             <input
               label="first Name"
               placeholder="First Name"
@@ -104,7 +104,7 @@ export default function Create() {
           </Form.Field>
 
           <Form.Field error={!!errors.lastName}>
-            <label>Last Name</label>
+            <h1>Last Name</h1>
             <input
               label="Last Name"
               placeholder="Last Name"
@@ -125,7 +125,7 @@ export default function Create() {
         </Form.Group>
 
         <Form.Field error={!!errors.telephoneNumber}>
-          <label>telephone Number</label>
+          <h1>Phone Number</h1>
           <input
             placeholder="phoneNumber"
             {...register("telephoneNumber", {
@@ -145,7 +145,7 @@ export default function Create() {
 
         <Form.Group widths="equal">
           <Form.Field error={!!errors.addressLineOne}>
-            <label>Address Line One</label>
+            <h1>Address Line One</h1>
             <input
               label="Address Line 1"
               placeholder="Address Line 1"
@@ -160,7 +160,7 @@ export default function Create() {
             <ErrorMessage errors={errors} name="addressLineOne" />
           </Form.Field>
           <Form.Field error={!!errors.addressLineTwo}>
-            <label>Address Line Two</label>
+            <h1>Address Line Two</h1>
             <input
               label="Address Line 2"
               placeholder="Address Line 2"
@@ -178,7 +178,7 @@ export default function Create() {
 
         <Form.Group widths="equal">
           <Form.Field error={!!errors.addressCity}>
-            <label>City</label>
+            <h1>City</h1>
             <input
               label="City"
               placeholder="City"
@@ -197,7 +197,7 @@ export default function Create() {
             <ErrorMessage errors={errors} name="addressCity" />
           </Form.Field>
           <Form.Field error={!!errors.addressPostCode}>
-            <label>Postcode</label>
+            <h1>Postcode</h1>
             <input
               label="Postcode"
               placeholder="Postcode"
@@ -218,7 +218,7 @@ export default function Create() {
         </Form.Group>
 
         <Form.Field error={!!errors.vehicleType}>
-          <label>vehicle Type</label>
+          <h1>Vehicle Type</h1>
           <Controller
             control={control}
             name="vehicleType"
@@ -239,7 +239,7 @@ export default function Create() {
         </Form.Field>
 
         <Form.Field error={!!errors.engineSize}>
-          <label>Engine Size</label>
+          <h1>Engine Size</h1>
           <Controller
             control={control}
             name="engineSize"
@@ -260,7 +260,7 @@ export default function Create() {
         </Form.Field>
 
         <Form.Field error={!!errors.additionalDrivers}>
-          <label>Additional Drivers</label>
+          <h1>Additional Drivers</h1>
           <Controller
             control={control}
             name="additionalDrivers"
@@ -280,7 +280,7 @@ export default function Create() {
           <ErrorMessage errors={errors} name="additionalDrivers" />
         </Form.Field>
 
-        <label> Will the vehicle be used for commercial purposes?</label>
+        <h1> Will the vehicle be used for commercial purposes?</h1>
         <Form.Field>
           <input
             label="Yes"
@@ -308,7 +308,7 @@ export default function Create() {
           No
           <ErrorMessage errors={errors} name="commerical" />
         </Form.Field>
-        <label>Will the vehicle be used outside the registered state?</label>
+        <h1>Will the vehicle be used outside the registered state?</h1>
         <Form.Field>
           <input
             label="Yes"
@@ -338,9 +338,9 @@ export default function Create() {
         </Form.Field>
 
         <Form.Field error={!!errors.vehicleValue}>
-          <label>
+          <h1>
             What is the current value of the vehicle (range 0 - 50000)?
-          </label>
+          </h1>
           <input
             placeholder="range 0 - 50000"
             {...register("vehicleValue", {
@@ -359,7 +359,7 @@ export default function Create() {
         </Form.Field>
 
         <Form.Field error={!!errors.dateRegistered}>
-          <label>What is the date the vehicle was first registered?</label>
+          <h1>What is the date the vehicle was first registered?</h1>
           <Controller
             className="react-datapicker__input-text"
             id="dateRegistered"
