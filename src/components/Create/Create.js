@@ -14,8 +14,6 @@ import "react-semantic-ui-datepickers/dist/react-semantic-ui-datepickers.css";
 import Select from "react-select";
 
 export default function Create() {
-
-
   const {
     register,
     handleSubmit,
@@ -50,6 +48,7 @@ export default function Create() {
     axios
       .post(endPointURL, userDetails)
       .then((response) => console.log(response))
+      .then((document.getElementById("form module").hidden = false))
       .catch((error) => console.log(error));
   };
 
@@ -58,7 +57,11 @@ export default function Create() {
   };
 
   return (
-    <div class="form">
+    <div class="Submit">
+      <div class="text">
+        <h1> Note:<br/>please ensure that all fields are entered before submitting. 
+          once submitted you should see your premium appear below.</h1>
+      </div>
       <Form onSubmit={handleSubmit(callMockAPI, handleError)}>
         <Form.Group widths="equal">
           <Form.Field error={!!errors.prefix}>
@@ -135,7 +138,8 @@ export default function Create() {
                 message: "Max length is 20 characters",
               },
               pattern: {
-                value: /^(((\+44\s?\d{4}|\(?0\d{4}\)?)\s?\d{3}\s?\d{3})|((\+44\s?\d{3}|\(?0\d{3}\)?)\s?\d{3}\s?\d{4})|((\+44\s?\d{2}|\(?0\d{2}\)?)\s?\d{4}\s?\d{4}))(\s?\#(\d{4}|\d{3}))?$/i,
+                value:
+                  /^(((\+44\s?\d{4}|\(?0\d{4}\)?)\s?\d{3}\s?\d{3})|((\+44\s?\d{3}|\(?0\d{3}\)?)\s?\d{3}\s?\d{4})|((\+44\s?\d{2}|\(?0\d{2}\)?)\s?\d{4}\s?\d{4}))(\s?\#(\d{4}|\d{3}))?$/i,
                 message: "must begin with a Number",
               },
             })}
@@ -208,9 +212,10 @@ export default function Create() {
                   message: "Max length is 8 characters",
                 },
                 pattern: {
-                  value: /([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9][A-Za-z]?))))\s?[0-9][A-Za-z]{2})/i,
-                  message: "This isn't a  valid postcode."
-                }
+                  value:
+                    /([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9][A-Za-z]?))))\s?[0-9][A-Za-z]{2})/i,
+                  message: "This isn't a  valid postcode.",
+                },
               })}
             />
             <ErrorMessage errors={errors} name="addressPostcode" />
@@ -286,7 +291,7 @@ export default function Create() {
             label="Yes"
             name="radioGroup"
             type="radio"
-            value = "True"
+            value="True"
             {...register("commercial", {
               required: "this field is mandatory",
             })}
@@ -299,7 +304,7 @@ export default function Create() {
             label="No"
             name="radioGroup"
             type="radio"
-            value = "False"
+            value="False"
             {...register("commercial", {
               required: "This field is mandatory",
             })}
@@ -314,7 +319,7 @@ export default function Create() {
             label="Yes"
             name="radioGroup2"
             type="radio"
-            value = "True"
+            value="True"
             {...register("registeredOutsideState", {
               required: "this field is mandatory",
             })}
@@ -327,7 +332,7 @@ export default function Create() {
             label="No"
             name="radioGroup2"
             type="radio"
-            value = "False"
+            value="False"
             {...register("registeredOutsideState", {
               required: " This field is mandatory",
             })}
@@ -338,9 +343,7 @@ export default function Create() {
         </Form.Field>
 
         <Form.Field error={!!errors.vehicleValue}>
-          <h1>
-            What is the current value of the vehicle (range 0 - 50000)?
-          </h1>
+          <h1>What is the current value of the vehicle (range 0 - 50000)?</h1>
           <input
             placeholder="range 0 - 50000"
             {...register("vehicleValue", {
@@ -381,6 +384,9 @@ export default function Create() {
 
         <Button type="submit">Submit</Button>
       </Form>
+      <div class="module" id="form module" hidden={true}>
+        <h1>this is a test message</h1>
+      </div>
     </div>
   );
 }

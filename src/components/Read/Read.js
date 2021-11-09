@@ -44,7 +44,7 @@ export default function Read() {
     <div>
       <Form>
         <Form.Field>
-          <label>enter driver ID</label>
+          <h1>Enter Driver ID:</h1>
           <input
             placeholder="ID"
             onChange={(e) => setInputId(e.target.value)}
@@ -55,12 +55,12 @@ export default function Read() {
         </Form.Field>
 
         <Form.Field>
-          <label>enter driver ID</label>
+          <h1>Enter Driver ID:</h1>
           <input
             placeholder="ID"
             onChange={(e) => setInputId(e.target.value)}
           />
-          <label>Enter New Telephone Number</label>
+          <h1>Enter New Telephone Number:</h1>
           <input
             placeholder="telephone"
             onChange={(e) => setNewTelephone(e.target.value)}
@@ -71,7 +71,7 @@ export default function Read() {
         </Form.Field>
 
         <Form.Field>
-          <label>enter driver ID</label>
+          <h1>Enter Driver ID:</h1>
           <input
             placeholder="ID"
             onChange={(e) => setInputId(e.target.value)}
