@@ -388,7 +388,7 @@ export default function Create() {
         <Button type="submit">Submit</Button>
       </Form>
       <div class="module" id="form module" hidden={true}>
-        <h1>this is a test message: {premium}</h1>
+        <h1>Insurance Premium: {premium}</h1>
       </div>
     </div>
   );

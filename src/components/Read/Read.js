@@ -41,7 +41,7 @@ export default function Read() {
   }
 
   return (
-    <div>
+    <div class ="Admin">
       <Form>
         <Form.Field>
           <h1>Enter Driver ID:</h1>
@@ -81,6 +81,7 @@ export default function Read() {
           </Button>
         </Form.Field>
       </Form>
+      <div class="Table">
       <Table celled>
         <Table.Header>
           <Table.Row>
@@ -123,6 +124,7 @@ export default function Read() {
           </Table.Row>
         </Table.Body>
       </Table>
+      </div>
     </div>
   );
 }
