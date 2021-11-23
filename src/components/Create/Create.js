@@ -385,7 +385,7 @@ export default function Create() {
           <ErrorMessage errors={errors} name="dateRegistered" />
         </Form.Field>
 
-        <Button type="submit">Submit</Button>
+        <Button type="submit" color="#0076b6">Submit</Button>
       </Form>
       <div class="module" id="form module" hidden={true}>
         <h1>Insurance Premium: {premium}</h1>
